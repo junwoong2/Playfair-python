@@ -1,0 +1,40 @@
+## 키테이블 만들기 ##
+
+f=open('c:/Test/Key.txt', 'r')
+key=f.read()
+
+key=key.replace(" ","")
+key=key.replace("\n", "")
+key=key.upper()
+
+result = list()
+for c in key:
+    if c not in result:
+        if c=='J':
+            result.append('I')
+        else:
+            result.append(c)
+            
+f.close()
+print(result)
+
+count=0
+for i in range(65,91):
+    if chr(i) not in result:#result에 포함되지 않은 알파벳 추가
+        if i==73 and chr(74) not in result:
+            result.append("I")#I가 없다면 I추가해주기
+            count=1
+        elif count==0 and i==73 or i==74: #J
+            pass
+        else:
+            result.append(chr(i))
+            
+cnt=0
+keytable=[[0 for i in range(5)]for j in range(5)]
+for i in range(0,5):
+    for j in range(0,5):
+        keytable[i][j]=result[cnt]
+        cnt+=1
+
+print(result)
+print(keytable)
